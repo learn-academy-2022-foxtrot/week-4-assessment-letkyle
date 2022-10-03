@@ -20,7 +20,7 @@ Researched answer:
 
 3. Ruby has an implicit return. What does that mean?
 
-Your answer:
+Your answer: It means that the language will return without having to tell it to return, for example in javascript you have to console.log it in order for it to return, but in ruby you can skip that step because it will automatically return it for you.
 
 Researched answer:
 
@@ -32,7 +32,7 @@ Researched answer:
 
 1. How do you extract a value in a Ruby hash?
 
-Your answer:
+Your answer: You can do it by calling on the key that is assigned to the value.
 
 Researched answer:
 
