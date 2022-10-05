@@ -16,35 +16,107 @@
 // a) Create a test with an expect statement using the variable provided. 
 // HINT: Check out this resource: https://jestjs.io/docs/expect#expectarraycontainingarray
 
-const colors1 = ["purple", "blue", "green", "yellow", "pink"]
-// Expected output example (can be a different order): ["yellow", "blue", "pink", "green"]
-const colors2 = ["chartreuse", "indigo", "periwinkle", "ochre", "aquamarine", "saffron"]
-// Expected output example (can be a different order): ["saffron", "aquamarine", "periwinkle", "indigo", "ochre"]
+//creating the test removeAndShuffle and describe what the test will do
+//looked at the resource given, use the method arrayContaining
 
+describe("removeAndShuffle", () => {
+
+const colors1 = ["purple", "blue", "green", "yellow", "pink"]
+    // Expected output example (can be a different order): ["yellow", "blue", "pink", "green"]
+const colors2 = ["chartreuse", "indigo", "periwinkle", "ochre", "aquamarine", "saffron"] 
+    // Expected output example (can be a different order): ["saffron", "aquamarine", "periwinkle", "indigo", "ochre"]
+
+it("that takes in an array, removes the first item from the array and shuffles the remaining content", () => {
+    expect(removeAndShuffle(colors1)).toEqual(expect.arrayContaining(["yellow", "blue", "pink", "green"]))
+    expect(removeAndShuffle(colors2)).toEqual(expect.arrayContaining(["saffron", "aquamarine", "periwinkle", "indigo", "ochre"]))
+})
+})
+
+//output: ReferenceError: removeAndShuffle is not defined, amazing fail
 
 // b) Create the function that makes the test pass.
+
+//creating a function with the name of removeAndShuffle, in this function I want it to remove the first value inside of the array, then have a new array with the left over words scrambled inside of a new array
+//inside the function I will be using the method .slice(1) in order to remove the first value (easy part)
+//now hard part I want to make the new array that scrambles the values in a random order, iterate through array with for loop, use math.random to randomize the order 
+
+
+const removeAndShuffle = (array) => {
+let newArray = array.slice(1)
+for (let i = newArray.length - 1; i > 0; i--) {
+    let randomNum = Math.floor(Math.random() * i + 1)
+    let temp = newArray[i]
+    newArray[i] = newArray[randomNum]
+    newArray[randomNum] = temp
+}
+return newArray
+}
+
+//output: PASS
 
 
 // --------------------2) Create a function that takes in an object that contains up votes and down votes and returns the net total of votes.
 
 // a) Create a test with expect statements for each of the variables provided.
 
-const votes1 = {upVotes: 13, downVotes: 2}
-// Expected output: 11
-const votes2 = {upVotes: 2, downVotes: 33}
-// Expected output: -31
+//creating the test netVotes and describe what the test will do
 
+
+describe ("netVotes", () => {
+
+const votes1 = {upVotes: 13, downVotes: 2}
+    // Expected output: 11
+const votes2 = {upVotes: 2, downVotes: 33}
+    // Expected output: -31)
+
+it("takes in an object that contains up votes and down votes and returns the net total of votes", () => {
+    expect(netVotes(votes1)).toEqual(11)
+    expect(netVotes(votes2)).toEqual(-31)
+})
+})
+
+//output: ReferenceError: netVotes is not defined, good error :)
 
 // b) Create the function that makes the test pass.
+
+//make a function named netVotes to access the objecct and have the keys subtract from each other starting with upVotes - downVotes then return the value of the two
+// votes1.upVotes - votes1.downVotes but make it more dynamic
+
+const netVotes = (object) => {
+return object.upVotes - object.downVotes
+}
+//output: PASS
 
 
 // --------------------3) Create a function that takes in two arrays as arguments and returns one array with no duplicate values. STRETCH: Use the spread operator to pass in a dynamic number of arguments.
 
 // a) Create a test with an expect statement using the variables provided.
 
-const dataArray1 = ["array", "object", "number", "string", "Boolean"]
-const dataArray2 = ["string", "null", "Boolean", "string", "undefined"]
-// Expected output: ["array", "object", "number", "string", "Boolean", "null", "undefined"]
+//creating the test mixArrays and describe what the test will do
+
+describe("mixedArrays", () => {
+
+    const dataArray1 = ["array", "object", "number", "string", "Boolean"]
+    const dataArray2 = ["string", "null", "Boolean", "string", "undefined"]
+
+    it("takes in two arrays as arguments and returns one array with no duplicate values", () => {
+  
+      expect(mixedArrays(dataArray1, dataArray2)).toEqual(["array", "object", "number", "string", "Boolean", "null", "undefined"])
+    })
+  })
+
+ 
+//output: ReferenceError: mixedArrays is not defined, good error
 
 
 // b) Create the function that makes the test pass.
+
+//make a function named mixArrays that combines the arrays, but if there are already 2 of the same values, just have one as the output
+//use the spread operator (...)
+// used this website https://thispointer.com/5-ways-to-merge-two-arrays-and-remove-duplicates-in-javascript/ in their example they used it with numbers inside 2 arrays
+
+const mixedArrays = (dataArray1, dataArray2) => {
+    return [...new Set([...dataArray1, ...dataArray2])];
+  };
+
+  //output: pass
